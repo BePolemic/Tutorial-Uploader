@@ -6,13 +6,13 @@
 
 Um oferecimento de [t.me/PolemicKnowledge](t.me/PolemicKnowledge)
 
-Versão 2.0
+Versão v100
 
-Sumário
+## Sumário
 
 1. Preparando o Ambiente
     1. ffmpeg
-    1. anaconda 
+    1. anaconda
 1. Preparando os Utilitários
 1. Como Utilizar os Utilitários e Upar Vídeos de Maneira Eficiente
     1. ETAPA 1
@@ -25,9 +25,9 @@ Sumário
 
 ## Importante
 
-Nenhum dos softwares utilizados nesse tutorial possui relação direta como o objetivo dos apps.
+Nenhum dos softwares utilizados nesse tutorial possui relação direta como o objetivo deste tutorial.
 
-O uso dos softwares em conjunto é uma decisão individual e livre de responsabilidade dos usuários.
+O uso dos softwares em conjunto para qualquer objetivo, é por uma decisão individual de responsabilidade de cada usuário.
 
 ## 1 preparando o ambiente
 
@@ -35,41 +35,63 @@ Para começar, é necessário instalar alguns programas que são dependências p
 
 ### 1.1 ffmpeg
 
-Para instalar o ffmpeg, basta ir em [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html), 
-No campo “get packages & executable files” clicar no botão que representa o Windows. Logo em seguida, escolheremos a opção “Windows builds from gyan.dev”, de lá, é só clicar no link [https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z) (também é possível simplesmente usar esse link) para baixar a versão completa e atualizada do programa.
+O ffmpeg é uma "caixa de ferramenta" que pode ser utilizada via linha de comando por qualquer linguagem de programação para fazer dezenas de operações com arquivos áudio, vídeo e legendas, incluindo transformar vídeos (codecs, resolução, bitrate) e extrair quaisquer informações (metadados) sobre esses arquivos.
 
-Agora uma pasta no disco local C deve ser criada com o nome de ffmpeg. O conteúdo baixado deve ser extraído para essa pasta, caso dentro do zip tenha uma pasta só com outras pastas dentro, é o conteúdo de dentro desta que deve ser extraído para a pasta criada no disco local C.
+#### Para obter o ffmpeg:
+- Baixe a partir deste [link direto]((https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z)), que contém a versão completa e atualizada do programa. Ou siga os passos abaixo.
+- Acesse [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html).
+- No campo “get packages & executable files”, clique no botão que representa o Windows.
+- Logo em seguida, escolha a opção `Windows builds from gyan.dev`
+- Em seguida clique no link `https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z`
 
-Depois é necessário buscar na busca do Windows por “editar as variáveis de ambiente do sistema” será aberto esse menu, e nele é só acessar o submenu “Variáveis de ambiente”:
+#### Configurando o ffmpeg:
+- Felizmente o ffmpeg não se instala, sendo uma aplicação portátil (portable). É necessário apenas o configurar para que seja possível o utilizar por terminal a partir de qualquer local ou pasta do PC.
+- Escolha um diretório e crie uma pasta com o nome `ffmpeg`.
+- O arquivo baixado deve ser extraído nesta pasta vazia que foi criada.
+- Para o ffmpeg ser acessável via terminal a partir de qualquer local do seu sistema, busque o termo `variáveis de ambiente` na ferramenta de busca do windows e acesse  a aplicação `editar as variáveis de ambiente do sistema`.
+- Na aplicação que será aberta, acesse a guia `Avançado` e clique no botão `Variáveis de Ambiente`.
 
 ![](images/image20.png)
 
-Será aberto esse menu, onde deve ser adicionado um novo caminho, clicando na linha “PATH” e depois clicando em “editar” (o que abrirá outra janela):
+- No form "Variáveis de Ambiente", clique no nome `Path` na coluna `Variável`. Em seguida clique no botão `Editar`.
 
 ![](images/image19.png)
 
-Na nova janela aberta é só clicar em “novo” e adicionar o caminho da pasta “bin” do ffmpeg. Essa pasta está dentro da primeira pasta criada no disco local C.
+- No form "Editar a variável de ambiente", clique no botão "Novo" e adicione o caminho da pasta `bin` que existe dentro da pasta criada para o ffmpeg.
+- Caso se tenha criado a pasta na "unidade C", a pasta `bin` estará no caminho: `C:\ffmpeg\bin`
 
 ![](images/image22.png)
 
-Logo após adicionar o novo caminho, afim de evitar erros, é interessante selecionas o novo caminho adicionado e clicar em “mover para cima”. Isso fará com que este tenha prioridade com relação ao caminho que já estava presente na lista.
+- Para evitar erros, logo após adicionar o novo caminho, selecione o novo caminho adicionado, em seguida clique no botão `Mover para Cima`.
+- Esta ação dará ao path criado, maior prioridade em relação aos demais paths da lista.
 
 ![](images/image21.png)
 
-Para verificar se está tudo funcionando, basta abrir o cmd do Windows e digitar “ffmpeg”. Caso esteja tudo certo, o resultado será como o abaixo:
+- Parabéns. O ffmpeg foi configurado como variável de sistema!
+- Para verificar se está tudo funcionando bem, basta abrir o cmd do Windows: (`[ctrl]+[r], cmd, [enter]`)
+- Em seguida digite `ffmpeg` no terminal aberto e tecle `[Enter]`. O resultado deve ser similar a imagem abaixo.
 
 ![](images/image25.png)
 
 
 ### 1.2 anaconda
+Anaconda é uma 'distribuição python' que funciona como pacote que instala a linguagem de programação Python, diversas libs de ciência de dados e outras coisas úteis.
+Diferentemente de enfrentar o trabalho de instalar cada pedaço separado, a instação do Anaconda automatiza o serviço e poupa bastante tempo.
 
-Esse é mais simples: basta ir em [https://www.anaconda.com/products/individual](https://www.anaconda.com/products/individual) e clicar em download, depois é só baixar a versão apropriada para a sua arquitetura (64 ou 32 bits).  Depois é só executar o .exe baixado. A instalação não possui detalhes, a não o de que é necessário marcar a opção em destaque abaixo, a outra caixa é opcional. A instalação pode demorar um pouco, mas isso é normal.
+#### Para obter o anaconda:
+* Acesse [https://www.anaconda.com/products/individual](https://www.anaconda.com/products/individual)
+* Clique em download
+* Baixe a versão apropriada para a sua arquitetura (64 ou 32 bits)
+* Execute o .exe baixado.
+* No form 'Advanced Options', marque `Add anaconda3 to my PATH environment variable`. Esta função automatiza a inclusão do Python no Path do windows, dispensando a repetição do trabalho executado no tópico anterior, com o ffmpeg.
+* Clique em `Install`
+* A instalação pode demorar alguns minutos, mas isso é normal.
 
 ![](images/image23.png)
 
-## 2 preparando os utilitários
+## 2 Preparação os utilitários
 
-Para começar, é só baixar os utilitários nos seguintes links:
+Baixe os utilitários nos seguintes links:
 
 1. Mass Video Join: [https://github.com/apenasrr/mass_videojoin](https://github.com/apenasrr/mass_videojoin)
 2. Time Stamp Link Maker: [https://github.com/apenasrr/timestamp_link_maker](https://github.com/apenasrr/timestamp_link_makerj)
@@ -77,30 +99,49 @@ Para começar, é só baixar os utilitários nos seguintes links:
 4.  Telegram_filesender: [https://github.com/apenasrr/Telegram_filesender](https://github.com/apenasrr/Telegram_filesender)
 5.  Zimatise: [https://github.com/apenasrr/zimatise](https://github.com/apenasrr/zimatise)
 
-
-Para baixar qualquer um desses, basta clicar no botão “code” e, em seguida, clicar em “Download ZIP”.
+### Como baixar
+- Clique no botão “Code” e, em seguida,
+- Clique em “Download ZIP”.
+- Repita o procedimento na página de cada utilitário
 
 ![](images/image27.png)
 
-Agora, basta extrair os utilitários, todos numa mesma pasta. Garanta de que as extensões de arquivo estão sendo exibidas indo no menu “Exibir” e então marcando a caixa “Extensões de nomes de arquivos”.
+- Extraia todos os utilitários numa mesma pasta.
+- Garanta de que as extensões de arquivo estão sendo exibidas, indo no menu “Exibir” e então marcando o checkbox “Extensões de nomes de arquivos”.
 
 ![](images/image26.png)
 
-ATENÇÃO: OS PASSOS A SEGUIR DEVEM SER REPETIDOS EM TODOS OS UTILITÁRIOS.
+`ATENÇÃO: OS PASSOS A SEGUIR DEVEM SER REPETIDOS EM TODOS OS UTILITÁRIOS.`
 
-Agora é preciso instalar as dependências de cada utilitário, para isso, basta executar o arquivo “upadete_libs.bat” dentro de cada pasta:
+### Atualizações de dependências
+O python é uma linguagem de programação, onde durante a atividade de programação, vários 'atalhos' são pegos através do uso de scripts que foram criados por outras pessoas. Eses scripts são chamados de 'Libs' (bibliotecas).
+
+Cada utilitário composto pelo Zimatise possui diversas libs requeridas, que precisamos baixar e atualizar.
+
+Para facilitar o processo, tudo foi resumido à execução de 1 arquivo.
+- Para cada pasta de utilitário, abra sua pasta e execute o arquivo `update_libs.bat`.
 
 ![](images/image30.png)
 
-Agora, renomeie as pastas, tirando o “-master” do nome cada uma, o resultado final deve ser esse:
+- Renomeie as pastas de cada utilitário, tirando o `“-master”` do nome cada uma. O resultado final deve ser esse:
 
 ![](images/image28.png)
 
-Por último, basta fazer uma última configuração no timestamp_link_maker: vá até a pasta e altere os textos dos arquivos “summary_bot” e “summary_top”:
+
+```
+CURIOSIDADE
+
+O passo acima só foi necessário porque os utilitários foram baixados através do botão 'code' no site do github.
+Se tivessem sido baixados por linha comando (git clone), as pastas apareceriam da forma desejada.
+Para saber mais: https://docs.github.com/pt/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+```
+### Customização do Zimatise
+#### Aplicação de assinatura no sumário do canal
+- Na pasta do utilitário timestamp_link_maker, os textos dos arquivos `“summary_bot.txt”` e `“summary_top.txt”` precisam ser alterados.
 
 ![](images/image29.png)
 
-No arquivo “summary_bot”, troque o texto que está lá por esse:
+* No arquivo “summary_bot”, troque o texto que está lá por esse:
 
 ```
 Bons estudos!
@@ -113,7 +154,7 @@ O resultado será como na imagem:
 
 ![](images/image31.png)
 
-No arquivo “summary_top”, troque o texto que está no arquivo por esse:
+- No arquivo “summary_top”, troque o texto que está no arquivo por esse:
 
 ```
 ⚠ Atenção ⚠
@@ -125,49 +166,101 @@ Utilize as # para navegar rapidamente entre os blocos de vídeos.
 Materiais em #Materiais
 ```
 
-O resultado será como na imagem:
+- O resultado será como na imagem:
 
 ![](images/image32.png)
 
-## 3 como utilizar os utilitários e upar vídeos de maneira eficiente
+#### Seleção dos arquivos à serem compactados
+Vídeos serão disponibilizados via streamming, mas demais arquivos serão compactados. Para gerar este efeito, é necessário informar ao Zimatise quais tipos de arquivos não deverão ser compactados.
+- Acesse a pasta do utilitário `Zipind`
+- Acesse a pasta `config`
+- Abra o arquivo `ignore_extensions.txt`
+- Na última linha do arquivo, adicione as extensões de vídeos que não deverão ser compactadas, tal como exemplo:
+- `mp4,avi,webm,ts,vob,mov,mkv,wmv`
 
-### 3.1 ETAPA 1
+![](images/image32-1.jpg)
+
+## 3 Como utilizar os utilitários - O segredo do Processo Automático e Upload eficiente
 
 Agora que todas as ferramentas estão prontas, é hora de usá-las.
 
-Comece indo na pasta do zimatise e execute o arquivo “zimatise.bat”, será aberta uma janela do cmd com um menu simples. Para começar, é ideal compactar quaisquer arquivos que não sejam de vídeo de dentro da pasta do curso. Para isso, basta digitar 1 e apertar enter:
+- Acesse a pasta do Zimatise e execute o arquivo “zimatise.bat”
+- Será aberta um `terminal` com um menu simples
+
+### 3.1 ETAPA 1 - Compactação de arquivos
+
+- No menu de opções, escolha a primeira opção digitando `1` e confirmando ao teclar `[Enter]`
 
 ![](images/image33.png)
 
-AVISO: Lembre-se de apertar enter após informar cada uma das informações em todas as etapas.
+> `AVISO: Lembre-se de teclar [Enter] após digitar uma resposta em todas as etapas.`
 
-Informe a pasta raiz do curso. O programa perguntará se o tamanho usado pela última vez deve ser utilizado, caso não seja digite “no”, informe o novo tamanho (em mb) e aguarde o processo de listagem. Se o tamanho informado for desejado, pasta aperta enter sem digitar nada. O processo de compactação será como na próxima imagem:
+> ATENÇÃO\
+> Mova a pasta do curso para a raiz do seu HD.\
+> Caso seu HD seja a unidade `C` e a pasta do curso se chame `meu_curso`, após a pasta ser movida, o caminho para ela será: `C:\meu_curso`.\
+> Este processo é importante pois o arquivo compactado preserva a hierarquia das pastas, gerando um resultado  incoveniente caso o curso esteja submerso entre diversas pastas no seu PC.\
+> Após a finalização do projeto, naturalmente o curso pode ser movido de volta para a pasta que o usuário achar conveniente.
+- Informe o caminho da pasta raiz do curso.
+- Para copiar o caminho, acesse a pasta pelo `Windows Explorer` e tecle `[ctrl]+[L], [ctrl]+[c]`
+- Caso ao tentar no colar no terminal, o atalho `[ctrl]+[v]` não funcione, clique com o botão direito do mouse dentro do terminal, que o caminho será colado.
+
+-  Na pergunta `The maximum size of each file will be... Ok?`, é informado o tamanho máximo por arquivo compactado que o script está configurado. Recomenda-se configurar como `1024`.
+-  Caso não esteja com o tamanho recomendado, digite `n`, confirme e em seguida digite o tamanho máximo recomendado.
+-  Na próxima vez que esta opção for utilizada, o último tamanho usado será lembrado.
+-  Caso o tamanho recomendado já esteja configurado, confirme sem digitar nada adicional, teclando `[Enter]`.
+-  O processo de compactação será como na próxima imagem:
 
 ![](images/image34.png)
 
-### 3.2 ETAPA 2
+### 3.2 ETAPA 2 - Gerar relatório de arquivos de vídeos
 
-Agora é necessário gerar uma listagem dos arquivos a serem padronizados e juntados em blocos. Para isso, basta selecionar a segunda opção digitando 2\. Informe a pasta da raiz do curso novamente e aguarde o processo de listagem:
+O processo dos vídeos se resume em agrupar os vídeos em grandes blocos de até 2 horas e/ou de tamnho máximo definido em megabytes.
+Para gerar esse efeito, os vídeos a serem agrupados preciam ter o mesmo perfil, com o mesmo **encode de áudio, vídeo** e mesma resolução.
+Para fazer esta análise e dá as instruções de transformação, siga os passos:
+- Ative a segunda opção digitando `2`
+- Informe o caminho da pasta do curso novamente e aguarde o processo de listagem
 
 ![](images/image35.png)
 
-Após a conclusão do processo o utilitário informará os codecs e resoluções presentes nos vídeos da pasta e escolherá o conjunto mais presente para ser o alvo de conversão dos outros vídeos presentes nas subpastas e na pasta raiz:
+- Após a conclusão do processo, o utilitário informará os perfis encontrados nos vídeos da pasta e escolherá o perfil mais popular para servir de modelo de conversão, onde os demais vídeos serão marcados para serem transformados para se igualar ao perfil popular.
 
 ![](images/image36.png)
 
-ATENÇÃO: FAÇA A PRÓXIMA ETAPA MESMO QUE QUE A ANTERIOR NÃO APONTE QUE SEJA NECESSÁRIO FAZER ALGUMA ALTERAÇÃO, POIS NO PRÓXIMO PASSO TAMBÉM SÃO GERADOS METADADOS IMPORTANTES PARA A SUÍTE!
 
-### 3.3 ETAPA 3
+```
+AVANÇADO
+Diminuindo o tempo necessário de reencode.
+- Também é possível não aceitar o plano sugerido de conversão. Onde você pode mudar o plano de conversão de modo a diminuir o tempo total de reencode sem afetar a qualidade final do projeto.
+- A mudança do plano do plano de reencode é realizada no relatório `video_details.xlsx` que foi criado na pasta do projeto.
+- Através da mudança ou exclusão dos valores de resolução de alguma das linhas da coluna "video_resolution_to_change".
 
-O próximo passo é reencodar os vídeos, para que estes fiquem todos no mesmo padrão. Para tal, basta escolher a terceira opção e aguardar a conclusão do processo.
+Onde está a pasta do projeto?
+- A pasta do projeto foi criada na pasta do Zimatise, com o nome: `output_{nome_da_pasta_do_curso}`.
+
+De que forma devo alterar o plano?
+- Recomenda-se que o objetivo de adaptação seja homogeneizar os perfis (transformar para terem o mesmo perfil de encode/resolução) apenas dentro de cada bloco de vídeo.
+- É recomendado que um bloco de vídeo não contenha vídeo de módulos diferentes. E não é necessário que diferentes blocos de vídeos tenham perfis homogêneos para possibilitar o processo de agrupamento.
+- Desta forma, basta que os vídeos de um mesmo módulo sejam homogêneos, não sendo necessário que todo o curso possua vídeos de mesmo perfil de encode/resolução, tal como será sugerido no plano automático de reencode.
+```
+
+> ATENÇÃO\
+> Execute a próxima etapa mesmo que a etapa anterior aponte que não seja necessário fazer alguma alteração, pois nesta etapa também são geradas transformações importantes no relatório, essenciais para o continuar o projeto com sucesso.
+
+### 3.3 ETAPA 3 - Reencode - Transformação de perfis
+
+O próximo passo é reencodar os vídeos, para os vídeos que serão agrupados, fiquem com o mesmo perfil de encode/resolução.\
+Este processo pode demorar entre 10% à 50% da duração total dos vídeos à serem transformados de acordo com o plano de reencode.\
+Assim, se o plano de reencode contiver 10 horas de vídeos, o processo de reencode pode demorar entre 1 à 5 horas, dependendo da potência de seu processador.
+
+- Selecione a terceira opção digitando `3` e aguarde a conclusão do processo.
 
 ![](images/image37.png)
 
-Após o final da padronização, o resultado será como o da imagem a seguir:
+- Após o final do processo de reencode, o resultado será similar ao da imagem a seguir:
 
 ![](images/image38.png)
 
-### 3.4 ETAPA 4
+### 3.4 ETAPA 4 - Agrupamento dos vídeos
 
 A próxima etapa consiste em agrupar vídeos que possuam o mesmo codec e resolução. Para isso, basta selecionar a quarta opção, caso o tamanho (em mb) informado seja o desejado, apenas aperte enter, caso não seja, digite “no”, aperte enter e informe o tamanho desejado para os blocos:
 
@@ -239,7 +332,7 @@ O upload automático precisa de um pequeno preparo para funcionar: comece abrind
 
 Agora siga os passos abaixo nesta exata ordem:
 1. Deixe a janela da pasta dos vídeos aberta
-2. Depois abra a janela do Telegram 
+2. Depois abra a janela do Telegram
 3. Depois abra a janela do Zimatise
 4. Faça isso utilizando o comando alt + tab, para evitar que a seleção do vídeo se perca. Caso não faça desta forma, há grande risco da automação gerar erros.
 5. Na janela do zimatise, digite 6 e tecle [enter]
