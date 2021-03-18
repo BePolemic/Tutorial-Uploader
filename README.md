@@ -35,7 +35,8 @@ Para começar, é necessário instalar alguns programas que são dependências p
 
 ### 1.1 ffmpeg
 
-Para instalar o ffmpeg, basta ir em [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html), e no campo “get packages & executable files” clicar no botão que representa o Windows. Logo em seguida, escolheremos a opção “Windows builds from gyan.dev”, de lá, é só clicar no link [https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z) (também é possível simplesmente usar esse link) para baixar a versão completa e atualizada do programa.
+Para instalar o ffmpeg, basta ir em [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html), 
+No campo “get packages & executable files” clicar no botão que representa o Windows. Logo em seguida, escolheremos a opção “Windows builds from gyan.dev”, de lá, é só clicar no link [https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z](https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z) (também é possível simplesmente usar esse link) para baixar a versão completa e atualizada do programa.
 
 Agora uma pasta no disco local C deve ser criada com o nome de ffmpeg. O conteúdo baixado deve ser extraído para essa pasta, caso dentro do zip tenha uma pasta só com outras pastas dentro, é o conteúdo de dentro desta que deve ser extraído para a pasta criada no disco local C.
 
