@@ -6,7 +6,7 @@
 
 Um oferecimento de [t.me/PolemicKnowledge](t.me/PolemicKnowledge)
 
-Versão v101
+Versão v102
 
 ## Sumário
 
@@ -370,7 +370,14 @@ Ambos arquivos serão salvos na pasta do projeto, dentro da pasta do utilitário
 #### 3.6 ETAPA 6 – O Upload
 Existem dois métodos para fazer o upload para o Telegram.
 O método automatizado via Macro de Teclado e o método através da API do telegram.
+
 Neste tutorial, ambos métodos serão abordados, mas é recomendado utilizar o método através da API do telegram, para ser mais eficiente no processo e minimizar riscos de erros manuais.
+
+> Por que enviar pela API do Telegram?\
+> R: Porque é mais rápido. Não gera conflito com máquinas virtuais onde você não pode utilizar macro de mouse/teclado. Não ocupa sua máquina durante a preparação do envio. Não congela a capacidade de enviar arquivos em seu app do Telegram enquanto upa os vídeos.
+
+> Quando enviar via Telegram app é preferível?\
+> R: Quando você não é administrador do grupo/canal alvo, tendo dificuldade de extrair o código `chat_id`, necessário quando enviado via API.
 
 ##### Upload via Macro de Teclado
 - Crie um novo canal privado no Telegram
@@ -394,7 +401,9 @@ Neste tutorial, ambos métodos serão abordados, mas é recomendado utilizar o m
 - A descrição deve conter o link do canal. Coloque-o acima da assinatura com o prefixo “Convite: ”, ou algo de cunho similar (caso pretenda mudar, avise a algum membro superior a você).
 
 ###### Coleta manual de Metadados
-Os metadados do cursos (tamanho e duração), normalmente já devem ter sido automaticamente gerado no arquivo `header_project.txt`. Assim, essa etapa do tutorial pode ser pulada.
+Essa etapa do tutorial pode ser pulada.
+
+Os metadados do cursos (tamanho e duração), normalmente já devem ter sido automaticamente gerados no arquivo `header_project.txt`.\
 Caso por algum motivo o arquivo não tenha sido automaticamente gerado, siga os passos abaixo para obter os metadados.
 - Acesse a pasta com os vídeos agrupados do curso
 - Esta pasta estará dentro da pasta do projeto, que por sua vez estará dentro da pasta do Zimatise.
@@ -437,18 +446,78 @@ Para executar esse método, é necessário um pequeno preparo para funcionar ade
 ![](images/image6.jpg)
 
 - Neste momento não toque no teclado e aguarde a colagem dos vídeos no app do Telegram terminarQuando o processo automático terminar,
+
+- Caso prefira fazer o upload manualmente, não utilizando a função via Macro de Teclado, apenas arraste os vídeos para a janela do Telegram ou use o clipe de papel no canto inferior esqueto do quadro do canal, copie e cole as descrições no relatório “descriptions.xlsx” e repita o processo para todos os blocos, na ordem correta.
+
+##### Upload via API do telegram
+
+Para se conectar ao Telegram via API, é necessário obter um `api_id` e um `api_hash`.\
+Mas não se preocupe, só é necessário seguir essas etapas uma vez na vida:
+- Para obter as credenciais para a API do Telegram, os códigos `api_id` e um` api_hash`:
+  - Faça login no seu [Telegram code] (https://my.telegram.org/)
+  - Acesse a área de ferramentas [desenvolvimento de API] (https://my.telegram.org/auth?to=apps)
+  - Existe um formulário que você precisa preencher, e depois disso, você receberá seus códigos de `api_id` e` api_hash`
+  - Para saber mais, acesse a documentação de ajuda do Telegram sobre [como obter suas credenciais de API] (https://core.telegram.org/api/obtaining_api_id)
+- Abra o arquivo `credentials.py` em qualquer editor de texto, como o notepad
+- Preencha as flags `api_id` e` api_hash` de acordo com aqueles obtidos com as instruções acima, semelhante ao exemplo abaixo:
+  - `api_id = 1111111`
+  - `api_hash = "sKwrdX7tb2xFDkPU9h0AsKwrdX7tb2xF"`
+- Os valores informados acima são apenas exemplos. Os valores inválidos.
+- Salve e feche o arquivo
+
+- Caso deseje criar um novo canal (opção mais rápida :satisfied:):
+  - Abra o arquivo `config/config.py` em qualquer editor de texto
+  - Altere a flag `create_new_channel` para `1`
+  - Salve e feche o arquivo
+  - Caso deseje **adicionar adms** automaticamente ao novo canal, adicione seus @Nicks (1 para cada linha) no arquivo: `Telegram_filesender\config\channel_adms.txt`
+  - Caso deseje **personalizar automaticamente a descrição** do novo canal, é importante lembrar que o conteúdo já foi criado baseado num template, na Etapa 5. Mas caso prefira, revise:
+    - Abra a pasta do projeto presente na pasta do Zimatise
+    - Acesse o arquivo `header_project.txt` e customize conforme necessário, mas atendo para que a primeira linha seja o nome do canal e as demais linhas correspondam a sua descrição.
+    - Se desejar, use a flag `{chat_invite_link}` para substituir automaticamente pelo link de convite para o novo canal.
+> Nota: A substituição automática do `link de convite` é mais uma das vantagens do método de envio `'Via Telegram API'` em relação ao método `'via Macro de Teclado'`
+
+- Cso deseje enviar para um grupo/canal existente (opção mais lenta :neutral_face:):
+  - Primeiro, é preciso obter o `chat_id` do grupo/canal. Siga os passos abaixo:
+    - Adicione o bot `@MissRose_bot` ao grupo/canal
+    - Envie a mensagem `/id` no grupo/canal
+    - Bot Rose responderá com o código `chat_id`. Este código deve ser um número negativo com igual ou maior que 9 caracteres.
+    - Copie o `chat_id` (incluindo o sinal de subtração)
+  - Abra o arquivo `Telegram_filesender\config\config.py` em qualquer editor de texto
+  - Altere a flag `chat_id` para o valor do chat_id copiado, semelhante ao exemplo abaixo
+  - por exemplo: `chat_id = -111111111`
+  - Altere a flah `create_new_channel` para` 0`, igual ao exemplo abaixo
+  - Ex.: `create_new_channel = 0`
+  - Salve e feche o arquivo
+
+- Na janela do zimatise, tecle `6` e confirme com `[Enter]`
+- Nas opções que aparecerão tecle `[Enter]` confirmando que será utilizado o arquivo `descriptions.xlsx` existente
+- Aparecerá a mensagem: `"How do you intend to send the files?"`
+- Tecle `2`, informando que será utilizado o método via Telegram API.
+- Aguarde a conclusão do Upload
+
+##### Após o Upload
 - Após o término do upload, faça manualmente o upload dos materiais, que se trata do arquivo `.rar` na pasta onde estão os vídeos agrupados.
 - Poste-o com a descrição `#Materiais`.
 - O envio do arquivo `.rar` pode ser feito antes ou depois do envio dos vídeos.
 
 ![](images/image7.png)
 
-- Caso prefira fazer o upload manualmente, não utilizando a função via Macro de Teclado, apenas arraste os vídeos para a janela do Telegram ou use o clipe de papel no canto inferior esqueto do quadro do canal, copie e cole as descrições no relatório “descriptions.xlsx” e repita o processo para todos os blocos, na ordem correta.
+- Agora iremos preencher no canal, o menu de navegação para facilitar o acesso aos diferentes vídeos e arquivos do curso.
+- Para isso, copie e cole no canal, o conteúdo do arquivo `summary.txt` presente na pasta do projeto, dentro da pasta do utilitário Zimatise.
+- Por fim, 'fixe' a mensagem colada clicando com o botão direito nela e selecionando a opção correspondente.
 
-##### Upload via API do telegram
-
-(em construção)
+![](images/image39.jpg)
 
 # Conclusão
 
-1. O resultado final do tutorial pode ser checado aqui: [https://t.me/joinchat/AAAAAFN6ZXVSxD6JKsbCkg](https://t.me/joinchat/AAAAAFN6ZXVSxD6JKsbCkg)
+O resultado final do tutorial pode ser visualizado aqui: [https://t.me/joinchat/AAAAAFN6ZXVSxD6JKsbCkg](https://t.me/joinchat/AAAAAFN6ZXVSxD6JKsbCkg)
+
+Ficamos felizes que você tenha concluído este tutorial.\
+Sua construção foi trabalhosa e gostaríamos de sua ajuda para torná-lo mais fácil de ser compreendido pelo maior número de pessoas.
+
+Quer ajudar a melhorar o tutorial?
+- Faça um [`pull request`](https://docs.github.com/pt/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) aqui no github com suas sugestões.
+- Ou envie suas sugestão em nosso [grupo no telegram](https://t.me/joinchat/U9WEkXjScV6Ku9rv).
+
+\
+Be [Polemic](www.t.me/polemic)
