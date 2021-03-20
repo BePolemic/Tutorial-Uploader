@@ -6,21 +6,22 @@
 
 Um oferecimento de [t.me/PolemicKnowledge](t.me/PolemicKnowledge)
 
-Versão v100
+Versão v101
 
 ## Sumário
 
 1. Preparando o Ambiente
     1. ffmpeg
     1. anaconda
-1. Preparando os Utilitários
+1. Customização do Zimatise
 1. Como Utilizar os Utilitários e Upar Vídeos de Maneira Eficiente
-    1. ETAPA 1
-    1. ETAPA 2
-    1. ETAPA 3
-    1. ETAPA 4
-    1. ETAPA 5
-1. Detalhes Finais
+    1. ETAPA 1 - Preparando o ambiente
+    1. ETAPA 2 - Gerar relatório de arquivos de vídeos
+    1. ETAPA 3 - Como utilizar os utilitários-O segredo do Processo Automático e Upload eficiente
+    1. ETAPA 4 - Agrupamento dos vídeos
+    1. ETAPA 5 - Descrições dos vídeos e do Projeto
+    2. ETAPA 6 - O Upload
+2. Conclusão
 
 
 ## Importante
@@ -29,7 +30,7 @@ Nenhum dos softwares utilizados nesse tutorial possui relação direta como o ob
 
 O uso dos softwares em conjunto para qualquer objetivo, é por uma decisão individual de responsabilidade de cada usuário.
 
-## 1 preparando o ambiente
+## ETAPA 1 - Preparando o ambiente
 
 Para começar, é necessário instalar alguns programas que são dependências para que os utilitários funcionem, são eles o ffmpeg e o anaconda.
 
@@ -94,7 +95,7 @@ Diferentemente de enfrentar o trabalho de instalar cada pedaço separado, a inst
 Baixe os utilitários nos seguintes links:
 
 1. Mass Video Join: [https://github.com/apenasrr/mass_videojoin](https://github.com/apenasrr/mass_videojoin)
-2. Time Stamp Link Maker: [https://github.com/apenasrr/timestamp_link_maker](https://github.com/apenasrr/timestamp_link_makerj)
+2. Time Stamp Link Maker: [https://github.com/apenasrr/timestamp_link_maker](https://github.com/apenasrr/timestamp_link_maker)
 3. Zipind: [https://github.com/apenasrr/zipind](https://www.google.com/url?q=https://github.com/apenasrr/zipind&sa=D&ust=1608417945410000&usg=AOvVaw22EBq1e5Hj2e1qtxo5p8lj)
 4.  Telegram_filesender: [https://github.com/apenasrr/Telegram_filesender](https://github.com/apenasrr/Telegram_filesender)
 5.  Zimatise: [https://github.com/apenasrr/zimatise](https://github.com/apenasrr/zimatise)
@@ -180,6 +181,47 @@ Vídeos serão disponibilizados via streamming, mas demais arquivos serão compa
 
 ![](images/image32-1.jpg)
 
+#### Definição de limites de tamanho e duração
+O processo de agrupamento dos vídeos é guiado por alguns limites para que o projeto não seja consolidado num único vídeo de dezenas de horas e gigabytes. A definição de limites sugerida está em sintonia com uma boa experiência em se assistir vídeos por stream.
+- Acesse a pasta do utilutário `mass_videojoin`
+- Em seguida acesse a pasta `config` e abra o arquivo `config.txt`
+- Na flag `size_per_file_mb`, defina como `'999'`
+- Na flag `duration_limit`, defina como `'02:00:00.00'`
+> Atenção: As aspas simples no início e final dos valores são necessárias.abra a pasta config A definição resume em agrupar os vídeos em grandes blocos com duração máxima de horas e/ou de tamanho máximo definido em megabytes.\
+
+![](images/image32-2.jpg)
+
+#### Ativação do Efeito de Transição nos vídeos
+Esta função é opcional. Para desestimular a prática de cópia dos vídeos sem que haja citação a equipe que os processou, pequenos vídeos podem ser usados no início e final do bloco de vídeo, com também usado na forma de efeitos de transição, entre os diversos vídeos que foram agrupados.\
+O Zimatise é inteligente para gerar novos vídeos de transição com resoluções diferentes na medida em que haja necessidade de os agrupar com vídeos cuja resolução seja diferente das encontradas até então.\
+Para evitar grandes distorções no processo de adaptação de resolução, é recomendado que se crie 2 vídeos de transição com **alta definição**, mas possuindo uma relação de largura/altura (aspect ratio) de `16:9` e outra com `4:3`.
+- Acesse a pasta do utilutário `mass_videojoin`
+- Em seguida acesse a pasta `transition`. Crie caso ela não exista.
+- Cole os vídeos de transição nessa pasta.
+- Em seguida acesse o arquivo de configurações (`mass_videojoin\config\config.txt`) e defina a flag `activate_transition` como `'true'`.
+- Caso não tenha interesse em usar o Efeito de Transição, defina a flag como `'false'`.
+
+![](images/image32-3.jpg)
+
+#### Padronização de Descrição do projeto
+A descrição do projeto pode ser automaticamente gerada, com algumas variáveis padronizadas, como tamanho do projeto em megabytes, duração em horas e até o 'link de convite', caso seja posteriormente utilizado API do Telegram no utilitário `Telegram_filesender` para subir os arquivos.
+- Acesse o arquivo `zimatise\header_template.txt`
+- O preencha com o texto abaixo:
+
+```
+{project_name}
+
+{project_name}
+
+Tamanho: {file_size}
+Duração: {duration}
+
+Convite: {chat_invite_link}
+
+
+Be @polemic
+```
+
 ## 3 Como utilizar os utilitários - O segredo do Processo Automático e Upload eficiente
 
 Agora que todas as ferramentas estão prontas, é hora de usá-las.
@@ -214,8 +256,9 @@ Agora que todas as ferramentas estão prontas, é hora de usá-las.
 
 ### 3.2 ETAPA 2 - Gerar relatório de arquivos de vídeos
 
-O processo dos vídeos se resume em agrupar os vídeos em grandes blocos de até 2 horas e/ou de tamnho máximo definido em megabytes.
-Para gerar esse efeito, os vídeos a serem agrupados preciam ter o mesmo perfil, com o mesmo **encode de áudio, vídeo** e mesma resolução.
+O processo dos vídeos se resume em agrupar os vídeos em grandes blocos com duração máxima de horas e/ou de tamanho máximo definido em megabytes.\
+Para gerar esse efeito, os vídeos a serem agrupados preciam ter o mesmo perfil, com o mesmo **encode de áudio, vídeo** e mesma **resolução**.\
+O processo de transformação dos perfis para serem iguais entre si, se chama `homogeneização de perfis`.\
 Para fazer esta análise e dá as instruções de transformação, siga os passos:
 - Ative a segunda opção digitando `2`
 - Informe o caminho da pasta do curso novamente e aguarde o processo de listagem
@@ -238,7 +281,7 @@ Onde está a pasta do projeto?
 - A pasta do projeto foi criada na pasta do Zimatise, com o nome: `output_{nome_da_pasta_do_curso}`.
 
 De que forma devo alterar o plano?
-- Recomenda-se que o objetivo de adaptação seja homogeneizar os perfis (transformar para terem o mesmo perfil de encode/resolução) apenas dentro de cada bloco de vídeo.
+- Recomenda-se que o objetivo de adaptação seja homogeneizar os perfis apenas dentro de cada bloco de vídeo.
 - É recomendado que um bloco de vídeo não contenha vídeo de módulos diferentes. E não é necessário que diferentes blocos de vídeos tenham perfis homogêneos para possibilitar o processo de agrupamento.
 - Desta forma, basta que os vídeos de um mesmo módulo sejam homogêneos, não sendo necessário que todo o curso possua vídeos de mesmo perfil de encode/resolução, tal como será sugerido no plano automático de reencode.
 ```
@@ -262,90 +305,150 @@ Assim, se o plano de reencode contiver 10 horas de vídeos, o processo de reenco
 
 ### 3.4 ETAPA 4 - Agrupamento dos vídeos
 
-A próxima etapa consiste em agrupar vídeos que possuam o mesmo codec e resolução. Para isso, basta selecionar a quarta opção, caso o tamanho (em mb) informado seja o desejado, apenas aperte enter, caso não seja, digite “no”, aperte enter e informe o tamanho desejado para os blocos:
+- O agrupamento obedecerá 5 critérios:
+  - Vídeos com perfil (resolução/codec), processado na etapa de reencode
+  - Limites de tamanho de arquivo e duração máxima dos vídeos
+  - E ajustes manuais pelo usuário realizados no relatório
+- Selecionar a quarta opção digitando `4`
+- Caso o limite de tamanho (em mb) informado seja o desejado, tecle `[Enter]`, caso não seja, digite `no`, tecle `[Enter]` e informe o tamanho máximo desejado para os blocos de vídeos agrupados.
+
+#### Ajustes manuais
+- Aparecerá a mensagem `"File [...] was updated with group column to gast join"`
+- Neste momento é possível fazer ajustes manuais no plano de agrupamento, através do relatório `video_details.xlsx` presente na pasta do projeto dentro da pasta do `Zimatise`.
+- Na coluna `group_encode`, é possível indicar que certos grupos de vídeos devem ficar em blocos diferentes, alterando sua numeração sequencial que fora agrupada. Recomenda-se ajustar para que vídeos de módulos diferentes fiquem em agrupamentos (numerações) diferentes.
+- Como exemplo, a imagem abaixo demonstra um projeto cujo plano de agrupamento foi ajustado manualmente para que vídeos de módulos diferentes fiquem em blocos diferentes. Sendo os primeiros 4 vídeos num bloco. Do 5º ao 8º em outro boco. 9º ao 11º em outro bloco. E por fim, o último vídeo sozinho num bloco. As numerações dos grupos são sempre sequenciais.
+
+![](images/image9-1.jpg)
+
+#### De volta ao processo
+Uma vez que o plano de agrupamento está como desejado...
+- Aparecerá a mensagem: `Start hashtag index count with what value?`
+- Neste momento, informe qual o início da numeração sequencial que os vídeos agrupados devem ser automaticamente gerados. Se trata do sufixo dos vídeos agrupados (`"-001.mp4", "-002.mp4"`)
+- Caso deseje manter o padrão de `1`, tecle `[Enter]`
+- O processo de agrupamento dos vídeos iniciará, com uma velocidade por volta de 700 vezes mais rápida que a duração dos vídeos.
 
 ![](images/image9.png)
 
-### 3.5 ETAPA 5
+### 3.5 ETAPA 5 - Descrições dos vídeos e do Projeto
 
-Na penúltima etapa é gerada a planilha com as descrições dos blocos (que contém quais vídeos estão em cada uma) e a descrição que contém a navegação para cada bloco. Selecione 5, depois escolha por onde começará a contagem, caso queira começar do número 1, apenas prossiga apertando enter, caso queira mudar, informe o valor em um número inteiro e aperte enter.
+Este é a etapa da geração planilha `descriptions.xlsx`, que contém as  descrições dos blocos de vídeos, com marcação temporal (timestamps) que servirá de menu de navegação para cada bloco.
+Também será gerado o arquivo `header_project.txt`, contendo a descrição do Canal conforme modelo configurado.
+Ambos arquivos serão salvos na pasta do projeto, dentro da pasta do utilitário Zimatise.
+- Selecionar a quinta opção digitando `5`
+- Aparecerá a mensagem: `Start hashtag index count with what value?`
+- Escolha qual a numeração inicial das hashtags das descrições dos blocos de vídeos. Caso deseje começar com o padrão 1, apenas tecle `[Enter]`. Caso deseje outra numeração inicial, informe em número inteiro e tecle `[Enter]`
+- Após a criação do arquivo `descriptions.xlsx`, aparecerá a mensagem: `TimeStamp and descriptions files created`.
+- Tecle `[Enter]` para o arquivo `header_project.txt` ser gerado.
 
 ![](images/image10.png)
 
-#### 3.5.1 ETAPA 5 – Corrigindo as descrições
+#### 3.5.1 ETAPA 5 – Ajustes das Descrições
 
-
-
-A planilha gerada será como a seguinte:
+- Acesse o relatório `descriptions.xlsx`
+- Caso exista avisos na coluna `"warning"` indicando `"max size reached"`, significa que para o vídeo daquela linha, a descrição gerada ultrapassa o limite do Telegram de 1000 caracteres (contendo os espaços).
 
 ![](images/image11.png)
 
-A parte destaca em vermelho indica que a descrição foi criada, porém ultrapassou o limite de 1000 caracteres (contando com espaços). Descrições assim devem ser alteradas para que funcionem apropriadamente. Clicando duas vezes na célula da descrição com problemas, ela se expandirá e será possível copiar o texto e colá-lo em um editor de texto (para fechar a célula, basta apertar esc), ou ainda alterar no próprio Excel. Nesse tutorial será utilizado o Word para ajeitar as descrições.
+- Essas descrições precisam ser alteradas para evitar uma colagem incompleta no Telegram.
+- Para alterar, clique duas vezes na célula da descrição com problemas
+- Ela se expandirá e será possível copiar o texto e colá-lo em um editor de texto (para fechar a célula, basta apertar `Esc`), ou ainda alterar no próprio Excel.
+- Nesse tutorial será utilizado o software "Microsoft Word" para corrigir as descrições com problemas.
 
 ![](images/image12.png)
 
-Usando a contagem de caracteres do Word é possível ver quantos caracteres existem no documento, e, por conseguinte, quantos deverão ser cortados:
+- Usando a contagem de caracteres do Word é possível ver quantos caracteres existem no documento, e, por dedução, quantos deverão ser cortados:
 
 ![](images/image13.png)
 
-Uma função muito útil do Word para correção de textos é a de substituição, eis um exemplo de uso:
+- Uma função muito útil do Word para correção de textos é a de substituição, segue um exemplo de uso:
 
 ![](images/image14.png)
 
-Depois que a descrição estiver com 1000 caracteres ou menos, basta copiá-la e cola-la na célula do Excel de onde ela foi originalmente copiada. Caso vá fazer o processo de upload manual, não é necessário fazer a substituição no Excel, pois é possível só copiar os textos corrigidos no Word. Também é importante corrigir erros de digitação e caracteres bugados em todas as descrições, e não só alterar aquelas que estejam acima do limite.
+- Depois que a descrição estiver com 1000 caracteres ou menos, copie e a cole na célula do Excel de onde ela foi originalmente copiada.
+- Também é importante corrigir erros de digitação e caracteres incompreensíveis em todas as descrições, ao invés de só alterar aquelas que estejam com tamanho acima do limite.
 
-#### 3.5.1 ETAPA 5 – Fazendo o Upload
+#### 3.6 ETAPA 6 – O Upload
+Existem dois métodos para fazer o upload para o Telegram.
+O método automatizado via Macro de Teclado e o método através da API do telegram.
+Neste tutorial, ambos métodos serão abordados, mas é recomendado utilizar o método através da API do telegram, para ser mais eficiente no processo e minimizar riscos de erros manuais.
 
-Primeiro deve ser feito um novo canal no Telegram. O canal deve OBRIGATORIAMENTE ter o nome oficial do curso, uma foto da logo do curso (caso o curso seja da udemy, utilize a thumb do vídeo de apresentação. Caso não encontre nada, consulte o resto da equipe). Na descrição (por enquanto) coloque a assinatura da Polemic ou o @ do canal principal.
+##### Upload via Macro de Teclado
+- Crie um novo canal privado no Telegram
+- O canal deve OBRIGATORIAMENTE ter o nome oficial do curso, uma foto da logo do curso (caso o curso seja da udemy, utilize a thumb do vídeo de apresentação. Caso não encontre nada, consulte o resto da equipe).
+- Na descrição, cole o conteúdo do arquivo  `header_project.txt` gerad na pasta do projeto. O ajuste caso necessário.
 
 ![](images/image15.png)
 
-Coloque o canal como privado e, clicando no link com o botão esquerdo ou direito do mouse, copie o link do canal.
+- Nas configurações do canal, copie seu link de convite
 
 ![](images/image16.png)
 
-O aplicativo dará a opção de adicionar pessoas para o seu canal (como seguidores). Apenas pule essa etapa ou adicione alguém da equipe que esteja num nível acima do seu (converse com a equipe e defina isso de antemão).
+- O Telegram dará a opção de adicionar pessoas no seu canal. Pule essa etapa ou adicione alguém da equipe que foi definido para ser seu orientador. (Converse com a equipe e defina isso de antemão)
 
 ![](images/image17.png)
 
-Agora é necessário editar o resto da descrição do canal: comece clicando nos três pontos no canto superior direito do quadro de visualização do canal, vá em “gerenciar canal”.
+- Clique no botão de "três pontos" no canto superior direito e clique em `“Gerenciar Canal”`.
 
 ![](images/image18.png)
 
-A descrição deve conter o link do canal, coloque-o acima da assinatura com o prefixo “Link desse canal: ”, ou algo de cunho similar (caso pretenda mudar, avise a algum membro superior a você). Agora devem ser preenchidos os metadados do curso. Vá na pasta com os vídeos do curso, a pasta estará dentro da pasta do curso, que por sua vez estará dentro da pasta do zimatise. Selecione todos os vídeos, clique com o botão direito e clique em “propriedades”.
+- A descrição deve conter o link do canal. Coloque-o acima da assinatura com o prefixo “Convite: ”, ou algo de cunho similar (caso pretenda mudar, avise a algum membro superior a você).
+
+###### Coleta manual de Metadados
+Os metadados do cursos (tamanho e duração), normalmente já devem ter sido automaticamente gerado no arquivo `header_project.txt`. Assim, essa etapa do tutorial pode ser pulada.
+Caso por algum motivo o arquivo não tenha sido automaticamente gerado, siga os passos abaixo para obter os metadados.
+- Acesse a pasta com os vídeos agrupados do curso
+- Esta pasta estará dentro da pasta do projeto, que por sua vez estará dentro da pasta do Zimatise.
+- Selecione todos os vídeos, clique com o botão direito em um deles e clique no botão `“propriedades”`.
 
 ![](images/image1.png)
 
-Será aberta uma janela. Nessa nova janela, na aba “geral”, copie o tamanho dos vídeos e coloque na descrição do canal, acima do link do mesmo. Depois, na aba “detalhes”, copie a duração total dos vídeos e também coloque na descrição do canal. A duração dos vídeos estará num bloco chamado “Vídeo”, na linha “Comprimento”. A duração deve estar no formato “XXh XXmin XXseg”
+- Na nova janela que será aberta, na aba `“geral”`, copie o tamanho dos vídeos e coloque na descrição do canal, acima do link de convite.
 
 ![](images/image2.png)
 
+- Na aba `“detalhes”` da mesma janela, copie a duração total dos vídeos e também coloque na descrição do canal. Esta informação estará no bloco chamado `“Vídeo”`, na linha `“Comprimento”`.
+- A duração deve estar no formato “XXh XXmin XXseg”
+
 ![](images/image3.png)
 
-Após essas alterações, a descrição do canal deve ficar como o exemplo abaixo:
+- Após essas alterações, a descrição do canal deve parecer similar ao exemplo abaixo:
 
 ![](images/image4.png)
 
-O upload automático precisa de um pequeno preparo para funcionar: comece abrindo a pasta do curso a ser upado e selecione o primeiro arquivo de vídeo.
+###### De volta ao upload
+O upload pelo método via Macro de Teclado consiste em o script imitar comandos de teclado para que cada arquivo de vídeo seja jogado de forma sequencial no app do Telegram juntamente com sua descrição.
+Para executar esse método, é necessário um pequeno preparo para funcionar adequadamente:
+- Abra a pasta dos vídeos agrupados do curso a ser upado e selecione o primeiro arquivo de vídeo.
 
 ![](images/image5.png)
 
-Agora siga os passos abaixo nesta exata ordem:
+- Siga os passos abaixo nesta exata ordem:
 1. Deixe a janela da pasta dos vídeos aberta
 2. Depois abra a janela do Telegram
 3. Depois abra a janela do Zimatise
-4. Faça isso utilizando o comando alt + tab, para evitar que a seleção do vídeo se perca. Caso não faça desta forma, há grande risco da automação gerar erros.
-5. Na janela do zimatise, digite 6 e tecle [enter]
-6. Nas opções que se exibirão, tecle [enter]
+- Faça isso utilizando o comando `alt + tab`, para evitar que a seleção do vídeo se perca.
+- Caso tenha errado a ordem de ativação das janelas, repita o processo até conseguir ativar as 3 janelas na exata ordem descrita.
+   > Atenção: Caso não faça desta forma, há grande risco da automação gerar erros.
+- Na janela do zimatise, tecle `6` e confirme com `[Enter]`
+- Nas opções que aparecerão tecle [enter] confirmando que será utilizado o arquivo `descriptions.xlsx` existente
+- Aparecerá a mensagem: `"How do you intend to send the files?"`
+- Tecle `1`, informando que será utilizado o método via Macro de Teclado, pelo app do Telegram.
 
-![](images/image6.png)
+![](images/image6.jpg)
 
-Quando o processo automático terminar, faça o upload dos materiais, trata-se do arquivo .zip na pasta onde estão os vídeos. Poste-os com #Materiais na descrição. Não há problemas em fazer o upload dos materiais antes de upar os vídeos.
+- Neste momento não toque no teclado e aguarde a colagem dos vídeos no app do Telegram terminarQuando o processo automático terminar,
+- Após o término do upload, faça manualmente o upload dos materiais, que se trata do arquivo `.rar` na pasta onde estão os vídeos agrupados.
+- Poste-o com a descrição `#Materiais`.
+- O envio do arquivo `.rar` pode ser feito antes ou depois do envio dos vídeos.
 
 ![](images/image7.png)
 
-Caso prefira fazer o upload manualmente, apenas arraste os vídeos para a janela do Telegram ou use o clipe de papel no canto inferior esqueto do quadro do canal, copie e cole as descrições na tabela “descriptions.xlsx” e repita o processo para todos os blocos, na ordem correta.
+- Caso prefira fazer o upload manualmente, não utilizando a função via Macro de Teclado, apenas arraste os vídeos para a janela do Telegram ou use o clipe de papel no canto inferior esqueto do quadro do canal, copie e cole as descrições no relatório “descriptions.xlsx” e repita o processo para todos os blocos, na ordem correta.
 
-# Detalhes finais
+##### Upload via API do telegram
+
+(em construção)
+
+# Conclusão
 
 1. O resultado final do tutorial pode ser checado aqui: [https://t.me/joinchat/AAAAAFN6ZXVSxD6JKsbCkg](https://t.me/joinchat/AAAAAFN6ZXVSxD6JKsbCkg)
