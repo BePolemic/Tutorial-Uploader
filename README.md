@@ -6,22 +6,23 @@
 
 Um oferecimento de [t.me/PolemicKnowledge](t.me/PolemicKnowledge)
 
-Versão v102
+Versão v103
 
 ## Sumário
 
 1. Preparando o Ambiente
     1. ffmpeg
     1. anaconda
-1. Customização do Zimatise
-1. Como Utilizar os Utilitários e Upar Vídeos de Maneira Eficiente
+    1. winrar
+2. Customização do Zimatise
+3. Como Utilizar os Utilitários e Upar Vídeos de Maneira Eficiente
     1. ETAPA 1 - Preparando o ambiente
-    1. ETAPA 2 - Gerar relatório de arquivos de vídeos
-    1. ETAPA 3 - Como utilizar os utilitários-O segredo do Processo Automático e Upload eficiente
-    1. ETAPA 4 - Agrupamento dos vídeos
-    1. ETAPA 5 - Descrições dos vídeos e do Projeto
-    2. ETAPA 6 - O Upload
-2. Conclusão
+    2. ETAPA 2 - Gerar relatório de arquivos de vídeos
+    3. ETAPA 3 - Como utilizar os utilitários-O segredo do Processo Automático e Upload eficiente
+    4. ETAPA 4 - Agrupamento dos vídeos
+    5. ETAPA 5 - Descrições dos vídeos e do Projeto
+    6. ETAPA 6 - O Upload
+4. Conclusão
 
 
 ## Importante
@@ -32,7 +33,7 @@ O uso dos softwares em conjunto para qualquer objetivo, é por uma decisão indi
 
 ## ETAPA 1 - Preparando o ambiente
 
-Para começar, é necessário instalar alguns programas que são dependências para que os utilitários funcionem, são eles o ffmpeg e o anaconda.
+Para começar, é necessário instalar alguns programas que são dependências para que os utilitários funcionem, são eles o ffmpeg, o anaconda e o Compactador.
 
 ### 1.1 ffmpeg
 
@@ -46,7 +47,29 @@ O ffmpeg é uma "caixa de ferramenta" que pode ser utilizada via linha de comand
 - Em seguida clique no link `https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z`
 
 #### Configurando o ffmpeg:
-- Felizmente o ffmpeg não se instala, sendo uma aplicação portátil (portable). É necessário apenas o configurar para que seja possível o utilizar por terminal a partir de qualquer local ou pasta do PC.
+- Felizmente o ffmpeg não se instala, sendo uma aplicação portátil (portable). É necessário apenas o configurar para que seja possível o utilizar por terminal a partir de qualquer local ou pasta do PC. Este processo é chamado de `Adicionar pasta às variáveis de ambiente`
+
+Primeiramente é preciso obter o caminho da pasta `bin` que existe dentro da pasta criada para o ffmpeg.
+- Caso se tenha criado a pasta do ffmpeg na "unidade C", a pasta `bin` estará no caminho: `C:\ffmpeg\bin`. Guarde o caminho da pasta, pois será usada na inclusão às variáveis de ambiente.
+
+##### Adicionar pasta às variáveis de ambiente
+Será ensinado duas formas de fazer isso:
+- A rápida, via terminal
+- E simpática, via interface gráfica (GUI)
+
+Execute apenas uma das formas.
+
+**Rápido: Adicionar pasta às variáveis de ambiente-Via Terminal**
+
+- Abrir Terminal com privilégio de admin
+  - `[WIN]+R, cmd, [CTRL]+[SHIFT]+[ENTER]`
+- Entrar com o comando:`setx /M path "%path%;{path_folder}"`
+	- Substituir `{path_folder}` pelo link da pasta a ser adicionada nas variáveis de sistema
+	- Exemplo caso a pasta esteja em `C:\myapp`
+		- `setx /M path "%path%;C:\myapp"`
+
+
+**Simpático: Adicionar pasta às variáveis de ambiente-Via interface gráfica**
 - Escolha um diretório e crie uma pasta com o nome `ffmpeg`.
 - O arquivo baixado deve ser extraído nesta pasta vazia que foi criada.
 - Para o ffmpeg ser acessável via terminal a partir de qualquer local do seu sistema, busque o termo `variáveis de ambiente` na ferramenta de busca do windows e acesse  a aplicação `editar as variáveis de ambiente do sistema`.
@@ -90,6 +113,23 @@ Diferentemente de enfrentar o trabalho de instalar cada pedaço separado, a inst
 
 ![](images/image23.png)
 
+### 1.3 Compactadores-Winrar ou 7zip
+Winrar ou 7zip são softwares compactadores que permitem agregar vários arquivos dentro de um único arquivo, facilitando o envio/recebimento de todo o 'pacote de arquivos' como um único arquivo.
+
+App [Winrar](https://www.win-rar.com/predownload.html?&L=9)
+- Possibilita usar a suite para compactar arquivos em modo '.rar'.
+- Exclusivo para sistema operacional Windows.
+
+App [7zip](https://www.7-zip.org/download.html)
+- Possibilita usar a suite para compactar arquivos em modo '.zip'.
+- Funciona em Windows e Linux.
+- Preferência de quem usa sistema operacional Linux.
+
+Configuração:
+- Instale o compactador que preferir ou ambos.
+- Adicione a pasta do app às variáveis de ambiente seguindo os mesmos passos realizados anteriormente quando se instalou o ffmpeg, no tópico `Adicionar pasta às variáveis de ambiente`.
+
+
 ## 2 Preparação os utilitários
 
 Baixe os utilitários nos seguintes links:
@@ -115,7 +155,7 @@ Baixe os utilitários nos seguintes links:
 `ATENÇÃO: OS PASSOS A SEGUIR DEVEM SER REPETIDOS EM TODOS OS UTILITÁRIOS.`
 
 ### Atualizações de dependências
-O python é uma linguagem de programação, onde durante a atividade de programação, vários 'atalhos' são pegos através do uso de scripts que foram criados por outras pessoas. Eses scripts são chamados de 'Libs' (bibliotecas).
+O python é uma linguagem de programação, onde durante a atividade de programação, vários 'atalhos' são pegos através do uso de scripts que foram criados por outras pessoas. Esses scripts são chamados de 'Libs' (bibliotecas).
 
 Cada utilitário composto pelo Zimatise possui diversas libs requeridas, que precisamos baixar e atualizar.
 
